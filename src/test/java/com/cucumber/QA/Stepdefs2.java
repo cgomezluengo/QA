@@ -24,6 +24,18 @@ public class Stepdefs2 {
 	public void value_a_fields_of_the_second_endpoint() throws Throwable {
 
 	}
+	
+	@Then("^the status code should be (\\d+)$")
+	public void the_status_code_should_be(int arg1) throws Throwable {
+		try {
+			
+			assertEquals(arg1, e.status());  //verify the status code in 200
+		} catch (Exception e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Then("^has more than (\\d+) comment$")
 	public void has_more_than_comment(int arg1) throws Throwable {
