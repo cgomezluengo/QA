@@ -19,6 +19,7 @@ import com.squareup.okhttp.Response;
 public class Endpoint {
 	//JSON Object for take a json 
 	private JSONObject o;
+	private int status;
 	OkHttpClient client = new OkHttpClient();
 		
 	public Endpoint() {
@@ -29,24 +30,21 @@ public class Endpoint {
 		
 		return o;
 	}
-	//method for a request of endpoint with a specific url
+	//method for a request of endpoint with a specific url with OKHTTP
 	public void req(String url) throws IOException{
 		Request request = new Request.Builder().url(url).build();
 
 		Response response = client.newCall(request).execute();
 
 		String str = response.body().string();
-	
+		this.status = response.code(); // save a status code in a status atribute 
 		this.o = new JSONObject(str);
+		
 	}
 	
-	//status value of the endpoint is in int
+	//return status value
 	public int status() throws IOException{
-		Request request = new Request.Builder().url("http://jsonplaceholder.typicode.com/posts/1").build();
-
-		Response response = client.newCall(request).execute();
-
-		return response.code();
+		return status;
 	}
 
 	public int userId() {
