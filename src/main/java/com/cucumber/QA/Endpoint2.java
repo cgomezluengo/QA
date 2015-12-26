@@ -29,18 +29,13 @@ public class Endpoint2 {
 		Response response = client.newCall(request).execute();
 
 		String str = response.body().string();
-	
+		this.status = response.code(); // save a status code in a status atribute
 		o = new JSONArray(str);
 	}
 	
-	
-	//status value of the endpoint is in int
+	//return status value
 	public int status() throws IOException{
-		Request request = new Request.Builder().url("http://jsonplaceholder.typicode.com/posts/1/comments").build();
-
-		Response response = client.newCall(request).execute();
-
-		return response.code();
+		return status;
 	}
 
 }
